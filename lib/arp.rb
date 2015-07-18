@@ -1,6 +1,4 @@
 require 'bindata-contrib'
-require_relative 'mac_address'
-require_relative 'ipv4_address'
 
 class Arp < BinData::Record
   HARDWARES = { ethernet: 1 }

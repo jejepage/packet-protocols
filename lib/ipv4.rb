@@ -1,5 +1,4 @@
 require 'bindata-contrib'
-require_relative 'ipv4_address'
 require_relative 'icmp'
 require_relative 'tcp'
 require_relative 'udp'
