@@ -23,4 +23,8 @@ class Arp < BinData::Record
   def ipv4_in_ethernet?
     hardware == :ethernet && protocol == :ipv4
   end
+
+  def length
+    28
+  end
 end
