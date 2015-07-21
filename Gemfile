@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
-gem 'bindata'
-gem 'bindata-contrib', '0.0.2'
-gem 'rspec'
+gem 'bindata-contrib', '~> 0.1'
+group :test do
+  gem 'rspec', '~> 3.2'
+end
