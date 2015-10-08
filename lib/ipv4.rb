@@ -9,7 +9,8 @@ class Ipv4 < BinData::Record
   endian :big
   bit4 :version, asserted_value: 4
   bit4 :header_length, initial_value: 5
-  uint8 :tos
+  bit6 :dscp
+  bit2 :ecn
   uint16 :total_length, initial_value: -> { header_length_in_bytes + payload.length }
   uint16 :identifier
   bit1 :reserved

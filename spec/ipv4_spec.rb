@@ -4,7 +4,7 @@ describe Ipv4 do
   let(:binary) {
     [
       0x45,           # version & header_length
-      7,              # tos
+      0xe0,           # dscp & ecn
       0, 32,          # total_length
       0, 1,           # identifier
       0, 0,           # flags & fragment_offset
@@ -27,7 +27,8 @@ describe Ipv4 do
     ipv4 = Ipv4.read(binary)
     expect(ipv4.version).to eq(4)
     expect(ipv4.header_length).to eq(5)
-    expect(ipv4.tos).to eq(7)
+    expect(ipv4.dscp).to eq(56)
+    expect(ipv4.ecn).to eq(0)
     expect(ipv4.total_length).to eq(32)
     expect(ipv4.identifier).to eq(1)
     expect(ipv4.df).to eq(false)
@@ -47,7 +48,8 @@ describe Ipv4 do
     ipv4 = Ipv4.new
     expect(ipv4.version).to eq(4)
     expect(ipv4.header_length).to eq(5)
-    expect(ipv4.tos).to eq(0)
+    expect(ipv4.dscp).to eq(0)
+    expect(ipv4.ecn).to eq(0)
     expect(ipv4.total_length).to eq(40)
     expect(ipv4.identifier).to eq(0)
     expect(ipv4.df).to eq(false)
