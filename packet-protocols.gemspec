@@ -15,6 +15,6 @@ Gem::Specification.new do |s|
   s.homepage     = 'https://github.com/jejepage/packet-protocols'
   s.license      = 'MIT'
 
-  s.add_runtime_dependency 'bindata-contrib', '~> 0.1'
+  s.add_runtime_dependency 'bindata-contrib', '0.1.1'
   s.add_development_dependency 'rspec', '~> 3.2'
 end
