@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.license      = 'MIT'
 
   s.add_runtime_dependency 'bindata-contrib', '0.1.2'
-  s.add_development_dependency 'rake', '~> 10.4'
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec', '~> 3.2'
+  s.add_development_dependency 'coveralls'
 end
