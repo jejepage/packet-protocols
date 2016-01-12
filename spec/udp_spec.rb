@@ -1,6 +1,4 @@
-require_relative '../lib/udp'
-
-describe Udp do
+describe PacketProtocols::Udp do
   let(:binary) {
     [
       0, 10,     # source_port
@@ -12,7 +10,7 @@ describe Udp do
   }
 
   it 'must read binary data' do
-    udp = Udp.read(binary)
+    udp = PacketProtocols::Udp.read(binary)
     expect(udp.source_port).to eq(10)
     expect(udp.destination_port).to eq(20)
     expect(udp.length).to eq(12)
@@ -22,7 +20,7 @@ describe Udp do
   end
 
   it 'must initialize with default values' do
-    udp = Udp.new
+    udp = PacketProtocols::Udp.new
     expect(udp.source_port).to eq(0)
     expect(udp.destination_port).to eq(0)
     expect(udp.length).to eq(8)
@@ -31,13 +29,13 @@ describe Udp do
   end
 
   it 'must be able to change accessors' do
-    udp = Udp.new
+    udp = PacketProtocols::Udp.new
     udp.destination_port = 20
     expect(udp.destination_port).to eq(20)
   end
 
   it 'must initialize with options' do
-    udp = Udp.new(source_port: 10, payload: [1, 2].pack('C*'))
+    udp = PacketProtocols::Udp.new(source_port: 10, payload: [1, 2].pack('C*'))
     expect(udp.source_port).to eq(10)
     expect(udp.length).to eq(10)
     expect(udp.payload).to eq([1, 2].pack('C*'))

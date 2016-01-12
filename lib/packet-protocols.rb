@@ -1,1 +1,2 @@
-require_relative 'ethernet'
+require 'packet-protocols/version'
+require 'packet-protocols/ethernet'

@@ -1,6 +1,4 @@
-require_relative '../lib/ipv4'
-
-describe Ipv4 do
+describe PacketProtocols::Ipv4 do
   let(:binary) {
     [
       0x45,           # version & header_length
@@ -24,7 +22,7 @@ describe Ipv4 do
   }
 
   it 'must read binary data' do
-    ipv4 = Ipv4.read(binary)
+    ipv4 = PacketProtocols::Ipv4.read(binary)
     expect(ipv4.version).to eq(4)
     expect(ipv4.header_length).to eq(5)
     expect(ipv4.dscp).to eq(56)
@@ -45,7 +43,7 @@ describe Ipv4 do
   end
 
   it 'must initialize with default values' do
-    ipv4 = Ipv4.new
+    ipv4 = PacketProtocols::Ipv4.new
     expect(ipv4.version).to eq(4)
     expect(ipv4.header_length).to eq(5)
     expect(ipv4.dscp).to eq(0)
@@ -65,13 +63,13 @@ describe Ipv4 do
   end
 
   it 'must be able to change accessors' do
-    ipv4 = Ipv4.new
+    ipv4 = PacketProtocols::Ipv4.new
     ipv4.identifier = 10
     expect(ipv4.identifier).to eq(10)
   end
 
   it 'must initialize with options' do
-    ipv4 = Ipv4.new(identifier: 10)
+    ipv4 = PacketProtocols::Ipv4.new(identifier: 10)
     expect(ipv4.identifier).to eq(10)
   end
 end

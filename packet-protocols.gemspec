@@ -1,4 +1,5 @@
-require_relative 'lib/packet-protocols/version'
+$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+require 'packet-protocols/version'
 
 Gem::Specification.new do |s|
   s.name         = 'packet-protocols'
@@ -15,6 +16,7 @@ Gem::Specification.new do |s|
   s.homepage     = 'https://github.com/jejepage/packet-protocols'
   s.license      = 'MIT'
 
-  s.add_runtime_dependency 'bindata-contrib', '0.1.1'
+  s.add_runtime_dependency 'bindata-contrib', '0.1.2'
+  s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'rspec', '~> 3.2'
 end

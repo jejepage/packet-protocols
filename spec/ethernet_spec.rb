@@ -1,6 +1,4 @@
-require_relative '../lib/ethernet'
-
-describe Ethernet do
+describe PacketProtocols::Ethernet do
   let(:binary) {
     [
       0, 0, 0, 0, 0, 2, # mac_destination
@@ -25,7 +23,7 @@ describe Ethernet do
   }
 
   it 'must read binary data' do
-    eth = Ethernet.read(binary)
+    eth = PacketProtocols::Ethernet.read(binary)
     expect(eth.mac_destination).to eq('00:00:00:00:00:02')
     expect(eth.mac_source).to eq('00:00:00:00:00:01')
     expect(eth.protocol).to eq(:arp)
@@ -36,7 +34,7 @@ describe Ethernet do
   end
 
   it 'must initialize with default values' do
-    eth = Ethernet.new
+    eth = PacketProtocols::Ethernet.new
     expect(eth.mac_destination).to eq('00:00:00:00:00:00')
     expect(eth.mac_source).to eq('00:00:00:00:00:00')
     expect(eth.protocol).to eq(:ipv4)
@@ -45,13 +43,13 @@ describe Ethernet do
   end
 
   it 'must be able to change accessors' do
-    eth = Ethernet.new
+    eth = PacketProtocols::Ethernet.new
     eth.mac_destination = '00:00:00:00:00:02'
     expect(eth.mac_destination).to eq('00:00:00:00:00:02')
   end
 
   it 'must initialize with options' do
-    eth = Ethernet.new(mac_destination: '00:00:00:00:00:02')
+    eth = PacketProtocols::Ethernet.new(mac_destination: '00:00:00:00:00:02')
     expect(eth.mac_destination).to eq('00:00:00:00:00:02')
   end
 end
@@ -59,9 +57,9 @@ end
 
 # require 'spec_helper'
 #
-# describe Ethernet do
+# describe PacketProtocols::Ethernet do
 #   it 'should read an unkown protocol' do
-#     packet = Ethernet.read [
+#     packet = PacketProtocols::Ethernet.read [
 #       0, 0, 0, 0, 0, 2, # mac_destination
 #       0, 0, 0, 0, 0, 1, # mac_source
 #       0, 0              # protocol
@@ -73,7 +71,7 @@ end
 #   end
 #
 #   it 'should read a VLAN packet' do
-#     packet = Ethernet.read [
+#     packet = PacketProtocols::Ethernet.read [
 #       0, 0, 0, 0, 0, 2, # mac_destination
 #       0, 0, 0, 0, 0, 1, # mac_source
 #       0x81, 0,          # protocol
@@ -93,7 +91,7 @@ end
 #
 #   describe 'with ARP' do
 #     it 'should read binary' do
-#       packet = Ethernet.read [
+#       packet = PacketProtocols::Ethernet.read [
 #         0, 0, 0, 0, 0, 2, # mac_destination
 #         0, 0, 0, 0, 0, 1, # mac_source
 #         8, 6,             # protocol
@@ -126,7 +124,7 @@ end
 #
 #   describe 'with IPv4/TCP' do
 #     it 'should read binary' do
-#       packet = Ethernet.read [
+#       packet = PacketProtocols::Ethernet.read [
 #         0, 0, 0, 0, 0, 2, # mac_destination
 #         0, 0, 0, 0, 0, 1, # mac_source
 #         8, 0,             # protocol
@@ -194,7 +192,7 @@ end
 #
 #   describe 'with IPv4/UDP' do
 #     it 'should read binary' do
-#       packet = Ethernet.read [
+#       packet = PacketProtocols::Ethernet.read [
 #         0, 0, 0, 0, 0, 2, # mac_destination
 #         0, 0, 0, 0, 0, 1, # mac_source
 #         8, 0,             # protocol
@@ -244,7 +242,7 @@ end
 #
 #   describe 'with IPv4/ICMP' do
 #     it 'should read binary' do
-#       packet = Ethernet.read [
+#       packet = PacketProtocols::Ethernet.read [
 #         0, 0, 0, 0, 0, 2, # mac_destination
 #         0, 0, 0, 0, 0, 1, # mac_source
 #         8, 0,             # protocol

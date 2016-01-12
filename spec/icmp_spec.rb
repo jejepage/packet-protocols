@@ -1,6 +1,4 @@
-require_relative '../lib/icmp'
-
-describe Icmp do
+describe PacketProtocols::Icmp do
   let(:binary) {
     [
       0,         # type
@@ -13,7 +11,7 @@ describe Icmp do
   }
 
   it 'must read binary data' do
-    icmp = Icmp.read(binary)
+    icmp = PacketProtocols::Icmp.read(binary)
     expect(icmp.type).to eq(:echo_reply)
     expect(icmp.code).to eq(0)
     expect(icmp.checksum).to eq(0)
@@ -24,7 +22,7 @@ describe Icmp do
   end
 
   it 'must initialize with default values' do
-    icmp = Icmp.new
+    icmp = PacketProtocols::Icmp.new
     expect(icmp.type).to eq(:echo_request)
     expect(icmp.code).to eq(0)
     expect(icmp.checksum).to eq(0)
@@ -34,7 +32,7 @@ describe Icmp do
   end
 
   it 'must be able to change accessors' do
-    icmp = Icmp.new
+    icmp = PacketProtocols::Icmp.new
     icmp.type = :echo_reply
     expect(icmp.type).to eq(:echo_reply)
     icmp.data = [1, 2, 3, 4].pack('C*')
@@ -42,7 +40,7 @@ describe Icmp do
   end
 
   it 'must initialize with options' do
-    icmp = Icmp.new(type: :echo_reply, sequence_number: 123)
+    icmp = PacketProtocols::Icmp.new(type: :echo_reply, sequence_number: 123)
     expect(icmp.type).to eq(:echo_reply)
     expect(icmp.sequence_number).to eq(123)
   end

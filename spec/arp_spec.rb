@@ -1,6 +1,4 @@
-require_relative '../lib/arp'
-
-describe Arp do
+describe PacketProtocols::Arp do
   let(:binary) {
     [
       0, 1,             # hardware
@@ -16,7 +14,7 @@ describe Arp do
   }
 
   it 'must read binary data' do
-    arp = Arp.read(binary)
+    arp = PacketProtocols::Arp.read(binary)
     expect(arp.hardware).to eq(:ethernet)
     expect(arp.protocol).to eq(:ipv4)
     expect(arp.hardware_length).to eq(6)
@@ -30,7 +28,7 @@ describe Arp do
   end
 
   it 'must initialize with default values' do
-    arp = Arp.new
+    arp = PacketProtocols::Arp.new
     expect(arp.hardware).to eq(:ethernet)
     expect(arp.protocol).to eq(:ipv4)
     expect(arp.hardware_length).to eq(6)
@@ -43,7 +41,7 @@ describe Arp do
   end
 
   it 'must be able to change accessors' do
-    arp = Arp.new
+    arp = PacketProtocols::Arp.new
     arp.operation = :reply
     expect(arp.operation).to eq(:reply)
     arp.mac_source = '01:23:45:67:89:01'
@@ -53,7 +51,7 @@ describe Arp do
   end
 
   it 'must initialize with options' do
-    arp = Arp.new(operation: :reply, ip_source: '192.168.0.1')
+    arp = PacketProtocols::Arp.new(operation: :reply, ip_source: '192.168.0.1')
     expect(arp.operation).to eq(:reply)
     expect(arp.ip_source).to eq('192.168.0.1')
   end

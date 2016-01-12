@@ -1,6 +1,4 @@
-require_relative '../lib/tcp'
-
-describe Tcp do
+describe PacketProtocols::Tcp do
   let(:binary) {
     [
       0, 10,      # source_port
@@ -16,7 +14,7 @@ describe Tcp do
   }
 
   it 'must read binary data' do
-    tcp = Tcp.read(binary)
+    tcp = PacketProtocols::Tcp.read(binary)
     expect(tcp.source_port).to eq(10)
     expect(tcp.destination_port).to eq(20)
     expect(tcp.sequence_number).to eq(1)
@@ -40,19 +38,19 @@ describe Tcp do
   end
 
   it 'must initialize with default values' do
-    tcp = Tcp.new
+    tcp = PacketProtocols::Tcp.new
     expect(tcp.source_port).to eq(0)
     expect(tcp.data_offset).to eq(5)
   end
 
   it 'must be able to change accessors' do
-    tcp = Tcp.new
+    tcp = PacketProtocols::Tcp.new
     tcp.source_port = 10
     expect(tcp.source_port).to eq(10)
   end
 
   it 'must initialize with options' do
-    tcp = Tcp.new(source_port: 10, options: [1, 2, 3, 4].pack('C*'))
+    tcp = PacketProtocols::Tcp.new(source_port: 10, options: [1, 2, 3, 4].pack('C*'))
     expect(tcp.source_port).to eq(10)
     expect(tcp.data_offset).to eq(6)
     expect(tcp.options).to eq([1, 2, 3, 4].pack('C*'))
