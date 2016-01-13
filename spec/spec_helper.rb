@@ -1,3 +1,3 @@
-require 'packet-protocols'
 require 'coveralls'
 Coveralls.wear!
+require 'packet-protocols'
